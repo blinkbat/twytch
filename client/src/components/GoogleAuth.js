@@ -1,4 +1,6 @@
 
+
+
 // dependencies
 import React from 'react';
 import { connect } from 'react-redux';
@@ -8,6 +10,7 @@ import { signIn, signOut } from '../actions';
 
 // env vars
 import googleClientId from '../env';
+
 
 
 class GoogleAuth extends React.Component {
@@ -40,25 +43,25 @@ class GoogleAuth extends React.Component {
 
 
 
+	// simple switch to detect auth status
 	onAuthChange = ( isSignedIn ) => {
-
 		if( isSignedIn ) {
-			this.props.signIn();
+			this.props.signIn( this.auth.currentUser.get().getId() );
 		} else {
 			this.props.signOut();
 		}
-
 	};
 
-
+	// fire signin
 	onSignInClick = () => {
 		this.auth.signIn();
 	};
 
-
+	// fire signout
 	onSignOutClick = () => {
 		this.auth.signOut();
 	};
+
 
 
 	renderAuthButton() {
@@ -106,7 +109,8 @@ class GoogleAuth extends React.Component {
 	}
 
 
-}
+
+} // end class
 
 
 const mapStateToProps = ( state ) => {

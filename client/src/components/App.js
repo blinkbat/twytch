@@ -7,7 +7,7 @@ import React from 'react';
 // browser - everything after domain root path
 // hash - everything after a hash
 // memory - doesn't use URL
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 
 // import from components
 import StreamCreate from './streams/StreamCreate';
@@ -18,6 +18,10 @@ import StreamShow from './streams/StreamShow';
 
 import Header from './Header';
 
+// import custom history file in order to
+// circumvent automatic history via BrowserRouter
+import history from '../history';
+
 
 const App = () => {
 
@@ -25,11 +29,11 @@ const App = () => {
 
 		<div>
 
-			<BrowserRouter>
+			<Router history={ history }>
 
 			<Header />
 
-				<div>
+				<div className="ui container">
 					<Route path="/" exact component={ StreamList } />
 					<Route path="/streams/new" component={ StreamCreate } />
 					<Route path="/streams/edit" component={ StreamEdit } />
@@ -37,7 +41,7 @@ const App = () => {
 					<Route path="/streams/show" component={ StreamShow } />
 				</div>
 				
-			</BrowserRouter>
+			</Router>
 
 		</div>
 
