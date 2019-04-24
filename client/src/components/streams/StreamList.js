@@ -13,27 +13,35 @@ class StreamList extends React.Component {
 		this.props.fetchStreams();
 	}
 
+
+
 	renderAdmin( stream ) {
 
 		if( stream.userId === this.props.currentUserId ) {
 			return (
-
 				<div className="right floated content">
 
-					<button className="ui button primary">
+					<Link 
+						className="ui button primary"
+						to={ `/streams/edit/${ stream.id }` }
+					>
 						Edit
-					</button>
+					</Link>
 
-					<button className="ui button negative">
+					<Link 
+						className="ui button negative"
+						to={ `/streams/delete/${ stream.id }` }
+					>
 						Delete
-					</button>
+					</Link>
 
 				</div>
-
 			);
 		}
 
 	}
+
+
 
 	renderList() {
 
@@ -42,29 +50,41 @@ class StreamList extends React.Component {
 			// note that we need to call renderAdmin() first
 			// due to how semantic-css works. :rolleyes:
 			return (
-				<div className="item" key={ stream.id }>
+				<div 
+					className="item" 
+					key={ stream.id } 
+					style={{ padding: '10px' }}
+				>
+
 					<div>
 						{ this.renderAdmin( stream ) }
 					</div>
 
-					<i className="large middle aligned icon camera" />
+					<i 
+						className="large middle aligned icon camera" 
+						style={{ paddingRight: '10px' }} 
+					/>
 
 					<div className="content">
-						{ stream.title }
+						<h3>{ stream.title }</h3>
 
 						<div className="description">
 							{ stream.description }
 						</div>
-
 					</div>
+
 				</div>
 			);
 
 		});
 	}
 
+
+
 	renderCreateBtn() {
+
 		if( this.props.isSignedIn ) {
+
 			return (
 				<div style={{ textAlign: 'right' }}>
 					<Link to="/streams/new" className="ui button green">
@@ -72,8 +92,12 @@ class StreamList extends React.Component {
 					</Link>
 				</div>
 			);
+
 		}
+
 	}
+
+
 
 	render() {
 		return (
@@ -90,7 +114,7 @@ class StreamList extends React.Component {
 		);
 	}
 
-}
+} // end class
 
 
 
@@ -102,7 +126,7 @@ const mapStateToProps = state => {
 	return { 
 		streams: 				Object.values( state.streams ), 
 		currentUserId: 	state.auth.userId,
-		isSignedIn:  state.auth.isSignedIn 
+		isSignedIn:  		state.auth.isSignedIn 
 	};
 
 }

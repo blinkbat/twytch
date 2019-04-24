@@ -61,6 +61,8 @@ export const createStream = formVals => {
 
 };
 
+
+
 // shorthand syntax for above
 export const fetchStreams = () => async dispatch => {
 
@@ -70,6 +72,8 @@ export const fetchStreams = () => async dispatch => {
 
 };
 
+
+
 export const fetchStream = id => async dispatch => {
 
 	const response = await streams.get( `/streams/${ id }` );
@@ -78,19 +82,31 @@ export const fetchStream = id => async dispatch => {
 
 };
 
+
+
 export const editStream = ( id, formVals ) => async dispatch => {
 
-	const response = await streams.put( `/streams/${ id }`, formVals );
+	// we use patch instead of put to avoid
+	// deleting values we don't include in the req
+	const response = await streams.patch( `/streams/${ id }`, formVals );
 
 	dispatch( { type: EDIT_STREAM, payload: response.data } );
 
+	// programmatic navigation to send user back to streams index
+	history.push( '/' );
+
 };
+
+
 
 export const deleteStream = id => async dispatch => {
 
 	await streams.delete( `/streams/${ id }` );
 
 	dispatch( { type: DELETE_STREAM, payload: id } );
+
+	// programmatic navigation to send user back to streams index
+	history.push( '/' );
 
 }
 

@@ -8,9 +8,9 @@ import GoogleAuth from './GoogleAuth';
 const Header = () => {
 
 	return (
-		<div className="ui secondary pointing menu">
+		<div className="ui secondary pointing menu" style={{ padding: '8px' }}>
 
-			<Link to="/" className="item">
+			<Link to="/" className="item" style={{ fontWeight: '900' }}>
 				Twytch
 			</Link>
 

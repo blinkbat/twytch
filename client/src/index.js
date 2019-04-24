@@ -13,6 +13,7 @@ import reducers from './reducers';
 // devtools setup
 const composeEnhancers 	= window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; 
 
+// redux setup
 const store = createStore( 
 	reducers,
 	composeEnhancers( applyMiddleware( reduxThunk ) )
