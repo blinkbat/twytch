@@ -7,7 +7,7 @@ import React from 'react';
 // browser - everything after domain root path
 // hash - everything after a hash
 // memory - doesn't use URL
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
 // import from components
 import StreamCreate from './streams/StreamCreate';
@@ -31,14 +31,18 @@ const App = () => {
 
 			<Router history={ history }>
 
-			<Header />
+				<Header />
 
 				<div className="ui container">
-					<Route path="/" exact component={ StreamList } />
-					<Route path="/streams/new" component={ StreamCreate } />
-					<Route path="/streams/edit/:id" component={ StreamEdit } />
-					<Route path="/streams/delete/:id" component={ StreamDelete } />
-					<Route path="/streams/show" component={ StreamShow } />
+
+					<Switch>
+						<Route path="/" exact component={ StreamList } />
+						<Route path="/streams/new" component={ StreamCreate } />
+						<Route path="/streams/edit/:id" component={ StreamEdit } />
+						<Route path="/streams/delete/:id" component={ StreamDelete } />
+						<Route path="/streams/:id" component={ StreamShow } />
+					</Switch>
+					
 				</div>
 				
 			</Router>
